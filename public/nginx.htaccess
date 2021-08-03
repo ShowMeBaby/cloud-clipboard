@@ -1,0 +1,12 @@
+location /b {
+	if (!-e $request_filename){
+		rewrite  ^(.*)$  /checkboard.php?s=$1  last;   break;
+	}
+}
+
+location /history {
+	if (!-e $request_filename){
+		rewrite  ^(.*)$  /history.php?s=$1  last;   break;
+	}
+}
+
