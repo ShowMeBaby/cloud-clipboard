@@ -48,7 +48,7 @@ function checkCookie()
 {
     $cookie_auth = $_COOKIE['auth'];
     if (strlen($cookie_auth) != 10) {
-        setcookie("auth", getRandomStr(10), time() + 60 * 60 * 24);
+        setcookie("auth", getRandomStr(10), time() + 31 * 24 * 60 * 60);
     }
 }
 

@@ -12,6 +12,7 @@ class boardDB
           GET_COUNT INT            NOT NULL,
           IS_DELETE INT            NOT NULL,
           TIME      INT              NOT NULL );';
+
     function __construct($fileName)
     {
         if (file_exists($fileName)) {
@@ -40,16 +41,25 @@ class boardDB
         $stmt->bindValue(':ctime', $time, SQLITE3_INTEGER);
         return $stmt->execute();
     }
-    function del($id)
+
+    function fakedel($id)
+    {
+        $sqliteDelete = "UPDATE BOARD SET IS_DELETE = 1 WHERE ID = '$id';";
+        return $this->execute($sqliteDelete);
+    }
+
+    function realdel($id)
     {
         $sqliteDelete = "DELETE FROM BOARD WHERE ID = '$id';";
         return $this->execute($sqliteDelete);
     }
+
     function coutnInc($id)
     {
-        $sqliteUpdata = "UPDATE BOARD SET GET_COUNT = GET_COUNT + 1 WHERE ID = '$id';";
+        $sqliteUpdata = "UPDATE BOARD SET GET_COUNT = GET_COUNT + 1 WHERE IS_DELETE = 0 AND ID = '$id';";
         return $this->execute($sqliteUpdata);
     }
+
     function edit($id, $message)
     {
         $time = time();
@@ -59,12 +69,14 @@ class boardDB
         $stmt->bindValue(':ctime', $time, SQLITE3_INTEGER);
         return $this->fetchArray($stmt->execute());
     }
+
     function get($id)
     {
-        $stmt = $this->sqliteResult->prepare("SELECT * FROM BOARD WHERE ID = :id;");
+        $stmt = $this->sqliteResult->prepare("SELECT * FROM BOARD WHERE IS_DELETE = 0 AND ID = :id;");
         $stmt->bindValue(':id', $id, SQLITE3_TEXT);
         return $this->fetchArray($stmt->execute());
     }
+
     function getHistory($cookie)
     {
         $time = time() - (24 * 60 * 60);
@@ -73,16 +85,19 @@ class boardDB
         $stmt->bindValue(':ctime', $time, SQLITE3_INTEGER);
         return $this->fetchArray($stmt->execute());
     }
+
     function getAll()
     {
         $sqliteSelect = "SELECT * FROM BOARD;";
         return $this->queryDB($sqliteSelect);
     }
+
     //此方法用于“增、删、改”
     function execute($sql)
     {
         return $this->error = $this->sqliteResult->exec($sql);
     }
+
     //此方法用于“查”
     function queryDB($sql)
     {

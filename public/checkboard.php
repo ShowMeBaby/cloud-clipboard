@@ -8,6 +8,13 @@ if (!empty($querycode)) {
     $board = new boardDB("../board.db");
     $board->coutnInc($querycode);
     $result = $board->get($querycode);
+
+    if ($result[0]['TIME'] + (7 * 24 * 60 * 60) < time()) {
+        // 超过7天的默认删除
+        $board->fakedel($querycode);
+        $result = [];
+    }
+
     if (count($result) == 0) {
         // key不存在,直接跳转到首页
         header('location://' . $_SERVER['SERVER_NAME']);
