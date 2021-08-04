@@ -38,7 +38,7 @@ checkCookie();
 
       <div class="mt-6">
          <p class="text-gray-600 text-base">*使用说明:</p>
-         <p class="text-gray-500 text-sm">1. 提交文字后将得到一个唯一链接，例如 <? echo buildBoardUrl('xxxx') ?></p>
+         <p class="text-gray-500 text-sm">1. 提交文字后将得到一个唯一链接，例如 <?php echo buildBoardUrl('xxxx') ?></p>
          <p class="text-gray-500 text-sm">2. 使用时,可直接访问返回的链接或扫码二维码访问 </p>
          <p class="text-gray-500 text-sm">3. 您也可以自行使用唯一链接生成二维码以便分享访问 </p>
          <p class="text-gray-500 text-sm">4. 您发布的内容将保存7天,过期的公告将会被删除 </p>
