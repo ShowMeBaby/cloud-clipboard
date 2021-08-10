@@ -11,7 +11,8 @@ checkCookie();
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>临时公告板-用于发布临时消息的公告板</title>
-   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+   <!-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,7 +25,7 @@ checkCookie();
 
          <div class="md:w-full">
             <div class="ipt-text">
-               <textarea id="text" class="resize-none border rounded-md w-full focus:outline-none px-2 py-1" cols="50" rows="5"></textarea>
+               <textarea id="text" class="resize-none border rounded-md w-full text-gray-600 focus:outline-none px-2 py-1" cols="50" rows="5"></textarea>
                <div class="flex justify-between items-center">
                   <p class="tips-text text-sm text-gray-400">*最多输入3000个字符</p>
                   <button class="border rounded-md shadow-md text-gray-500 text-base px-2 cursor-pointer w-16" onclick="submit()">提交</button>

@@ -9,4 +9,3 @@ location /history {
 		rewrite  ^(.*)$  /history.php?s=$1  last;   break;
 	}
 }
-
